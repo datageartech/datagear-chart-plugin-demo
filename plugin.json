@@ -1,0 +1,23 @@
+{
+    "id": "demoECharts",
+    "nameLabel": "ECharts示例",
+    "apiVersion": "2.0",
+    "dataSignSpec":
+    [
+        {
+            "name": "name",
+            "nameLabel": "名称"
+        },
+        {
+            "name": "value",
+            "nameLabel": "值"
+        }
+    ],
+    "dataSetRange": 1,
+    "version": "1.0.0",
+    "author": "somebody",
+    "contact": "somebody@example.com",
+    "additions":{
+        "internalRendererVar": "demoEChartsRenderer"
+    }
+}

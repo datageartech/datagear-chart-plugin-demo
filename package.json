@@ -1,0 +1,25 @@
+{
+  "name": "datagear-chart-plugin-demo",
+  "version": "1.0.0",
+  "description": "DataGear图表插件示例",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "datagear",
+    "echarts",
+    "vite",
+    "iife"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "echarts": ">=5.0.0"
+  }
+}

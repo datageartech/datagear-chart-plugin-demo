@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECharts 折线图示例 · Vite(IIFE)</title>
+  <link type="text/css" href="http://localhost:50401/static/analysisapi/2.0/css/style.css" rel="stylesheet" dg-lib-name="dashboardStyle" />
+  <script type="text/javascript" src="http://localhost:50401/static/analysisapi/2.0/chartFactory.js" dg-lib-name="chartFactory" ></script>
+  <script type="text/javascript" src="http://localhost:50401/static/analysisapi/2.0/dashboardFactory.js" dg-lib-name="dashboardFactory" ></script>
+  <script type="text/javascript" src="http://localhost:50401/static/analysisapi/2.0/chartTool.js" dg-lib-name="chartTool" ></script>
+  <!--
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js"></script>
+  -->
+  <style>
+    body { margin: 0; padding: 1rem; }
+    h1 { text-align: center; margin: 0; }
+    .operation { text-align: center; margin-top: 1rem; }
+    .operation button { padding: 0.5rem 1rem; }
+    .chart { height:  50vh; border: 2px solid #e6e6e6; border-radius: 0.6rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>ECharts 折线图示例</h1>
+  <div class="operation">
+    <button id="switchTheme">切换主题</button>
+  </div>
+  <div id="chart01" dg-chart-fetcher="global" class="chart"></div>
+
+  <script type="module">
+    import internalRenderer from "./src/index.js";
+
+    function mountInternalRenderer(plugin)
+    {
+      window[plugin.additions.internalRendererVar] = internalRenderer;
+    }
+
+    var dashboardFetcher = function(context){
+      var dr = {
+        chartResults: {
+          "chart01": {
+            dataSetResults: [
+              {
+                data: [
+                  { "s_name": "周一", "s_value": 120 },
+                  { "s_name": "周二", "s_value": 150 },
+                  { "s_name": "周三", "s_value": 100 },
+                  { "s_name": "周四", "s_value": 130 },
+                  { "s_name": "周五", "s_value": 80 }
+                ]
+              },
+              {
+                data: [
+                  { "p_name": "周一", "p_value": 20 },
+                  { "p_name": "周二", "p_value": 50 },
+                  { "p_name": "周三", "p_value": 30 },
+                  { "p_name": "周四", "p_value": 10 },
+                  { "p_name": "周五", "p_value": 20 }
+                ]
+              }
+            ]
+          }
+        }
+      };
+      return dr;
+    };
+
+    var chartRoot = {
+      id: "chart01",
+      name: "chart01",
+      dataSetBinds:[
+        {
+          dataSet: {
+            name: "周销量",
+            fields: [
+              { name: "s_name", type: "string" },
+              { name: "s_value", type: "number" },
+            ]
+          },
+          fieldSigns: {
+            "s_name": ["name"],
+            "s_value": ["value"]
+          }
+        },
+        {
+          dataSet: {
+            name: "周利润",
+            fields: [
+              { name: "p_name", type: "string" },
+              { name: "p_value", type: "number" },
+            ]
+          },
+          fieldSigns: {
+            "p_name": ["name"],
+            "p_value": ["value"]
+          }
+        }
+      ]
+    };
+
+    window.addEventListener("load", () => {
+      fetch("plugin.json").then(res => res.json()).then(plugin => {
+        fetch("renderer.js").then(res => res.text()).then(renderer => {
+          mountInternalRenderer(plugin);
+          chartRoot.plugin = plugin.id;
+          const dashboard = dashboardFactory.createForPluginDev({
+            plugins: { plugin: plugin, renderer: renderer }
+          });
+          dashboard.init();
+          dashboard.fetcher(dashboardFetcher);
+          dashboard.render();
+          dashboard.createChart("#chart01", chartRoot);
+        });
+      });
+
+      document.getElementById("switchTheme").addEventListener("click", () => {
+        var chart = dashboard.chart("chart01");
+        var theme = chart.theme();
+        theme = (theme.name == "switchTheme" ? {} : {
+          color: "#ffff00",
+          backgroundColor: "#222222",
+          graphColors: [ "#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff", "#ffffff" ],
+          name: "switchTheme"
+        });
+        chart.theme(theme);
+	      chart.destroy();
+	      chart.render();
+      });
+    });
+  </script>
+</body>
+</html>
