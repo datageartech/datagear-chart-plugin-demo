@@ -1,9 +1,8 @@
 (function(plugin)
 {
   const internalDepend = { name: "echarts", acceptVersion: ">=5.0" };
-
   const internalRendererVar = plugin.additions.internalRendererVar;
-  const r = {
+  const renderer = {
     depend: {
         name: internalRendererVar, source: "dist/internal-renderer.js",
         version: plugin.version, depend: internalDepend
@@ -31,6 +30,6 @@
     }
   };
 
-  return r;
+  return renderer;
 })
 (plugin);
