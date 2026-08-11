@@ -3,25 +3,44 @@ import path from 'node:path';
 import fs from 'node:fs';
 import zipPack from 'vite-plugin-zip-pack';
 
-//对src/index.js进行构建打包时外部化的依赖库
-const buildExternal = ['echarts'];
-//上述外部化的依赖库在产物中映射到的全局变量名
-const buildExternalGlobalVars = {
-  echarts: 'echarts'
-};
 //要添加至图表插件zip包的文件列表
 const pluginZipFiles = ['plugin.json', 'renderer.js'];
+
+//对src/index.js进行构建打包时外部化的依赖库
+const buildExternal = [];
+//上述外部化的依赖库在产物中映射到的全局变量名
+const buildExternalGlobalVars = {};
+
+const distDirName = "dist";
+const distFileName = "internal-renderer.js";
 
 const pluginJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, 'plugin.json'), 'utf-8')
 );
 const internalRendererVar = pluginJson.additions.internalRendererVar;
-const distDirName = "dist";
-const distFileName = "internal-renderer.js";
 
 const distDir = path.resolve(__dirname, distDirName);
 // 临时打包目录：项目内的 .temp 目录
 const tempDir = path.resolve(__dirname, '.temp');
+
+function inflateBuildExternal(depend) {
+  if(depend == null)
+    return;
+
+  depend = (Array.isArray(depend) ? depend : [ depend ]);
+  for(let i=0; i<depend.length; i++) {
+    let item = depend[i];
+    let importName = (item.importName != null ? item.importName : item.name);
+    if(!buildExternal.includes(importName))
+    {
+      buildExternal.push(importName);
+      buildExternalGlobalVars[importName] = item.name;
+    }
+    inflateBuildExternal(item.depend);
+   }
+}
+
+inflateBuildExternal(pluginJson.additions.externalDepend);
 
 // 在产物写入 dist 之后（writeBundle），将 plugin.json、renderer.js 及
 // dist 文件夹复制到临时目录，供 vite-plugin-zip-pack 压缩。

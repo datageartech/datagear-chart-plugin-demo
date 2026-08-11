@@ -19,6 +19,9 @@
     "author": "somebody",
     "contact": "somebody@example.com",
     "additions":{
-        "internalRendererVar": "demoEChartsRenderer"
+        "internalRendererVar": "demoEChartsRenderer",
+        "externalDepend": [
+            { "name": "echarts", "acceptVersion": ">=5.0" }
+        ]
     }
 }

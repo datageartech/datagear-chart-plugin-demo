@@ -1,12 +1,12 @@
 (function(plugin)
 {
-  const internalDepend = { name: "echarts", acceptVersion: ">=5.0" };
   const internalRendererVar = plugin.additions.internalRendererVar;
   const internalRendererSource = "dist" + "/" + "internal-renderer.js";
+  const externalDepend = plugin.additions.externalDepend;
   const renderer = {
     depend: {
         name: internalRendererVar, source: internalRendererSource,
-        version: plugin.version, depend: internalDepend
+        version: plugin.version, depend: externalDepend
     },
     render: function(chart) {
         return this._internalRenderer().render(chart);

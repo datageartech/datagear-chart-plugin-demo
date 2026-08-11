@@ -18,15 +18,27 @@ DataGear是一款开源免费的数据可视化分析平台，支持自由制作
 
 ## 初始化项目
 
-1. plugin.json
+### 1. plugin.json
 
-2. renderer.js
+根据插件功能，定义`plugin.json`文件的内容，具体参考上述图表插件开发文档中的`plugin.json`文件规范。
 
-3. src/index.js
+其中：
 
-4. index.html
+- `id`值必须修改，且要确保全局唯一。
+- `additions.internalRendererVar`用于定义`src/index.js`打包后的全局JS变量名，其值必须修改，且要确保全局唯一。
+- `additions.externalDepend`用于定义`src/index.js`打包后的外部依赖库，应根据其`import`内容同步修改。
 
-5. vite.config.js
+### 2. src/index.js
+
+根据插件功能，定义`internalRenderer`逻辑。
+
+### 3. index.html
+
+此文件仅用于调试项目，通常仅需要修改如下内容：
+
+- `dashboardFetcher()`函数的`data`数据。
+
+- `chartRoot`中的`dataSetBinds`数据。
 
 ## 调试项目
 
@@ -35,10 +47,12 @@ npm install
 npm run dev
 ```
 
+在浏览器中打开调试地址（比如`http://localhost:5173`）即可查看和调试。
+
 ## 打包项目
 
 ```bash
 npm run build
 ```
 
-执行后，会在产物目录（默认为`dist`）内生成图表插件的zip包。
+执行后，会在产物目录（默认为`dist`）内生成图表插件的zip包，按照上述图表插件开发文档中的步骤安装至DataGear系统后即可使用。
