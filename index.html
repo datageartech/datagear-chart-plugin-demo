@@ -26,11 +26,6 @@
   <script type="module">
     import internalRenderer from "./src/index.js";
 
-    function mountInternalRenderer(plugin)
-    {
-      window[plugin.additions.internalRendererVar] = internalRenderer;
-    }
-
     var dashboardFetcher = function(context){
       var dr = {
         chartResults: {
@@ -92,6 +87,12 @@
           }
         }
       ]
+    };
+
+    //将internalRenderer挂载到全局变量，跳过图表渲染时默认的依赖库加载逻辑
+    var mountInternalRenderer = function(plugin)
+    {
+      window[plugin.additions.internalRendererVar] = internalRenderer;
     };
 
     window.addEventListener("load", () => {

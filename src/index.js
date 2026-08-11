@@ -90,7 +90,8 @@ var internalRenderer = {
       let result = chart.resultOf(chartResult, dataSetBind);
       let nameField = chart.dataSetFieldOfSign(dataSetBind, 0);
       let valueField = chart.dataSetFieldOfSign(dataSetBind, 1);
-      let data = chart.resultNameValueDatas(result, nameField, valueField);
+      let fieldMap = { name: nameField, value: [ nameField , valueField ] };
+      let data = chart.resultMapDatas(result, fieldMap);
       let serisName = chart.dataSetAlias(dataSetBind);
 
       options.legend.data.push({ name: serisName });
