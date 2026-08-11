@@ -42,11 +42,11 @@
               },
               {
                 data: [
-                  { "p_name": "周一", "p_value": 20 },
-                  { "p_name": "周二", "p_value": 50 },
-                  { "p_name": "周三", "p_value": 30 },
-                  { "p_name": "周四", "p_value": 10 },
-                  { "p_name": "周五", "p_value": 20 }
+                  { "p_name": "周一", "p_gross": 20, "p_net": 15 },
+                  { "p_name": "周二", "p_gross": 50, "p_net": 36 },
+                  { "p_name": "周三", "p_gross": 30, "p_net": 22 },
+                  { "p_name": "周四", "p_gross": 10, "p_net": 5 },
+                  { "p_name": "周五", "p_gross": 20, "p_net": 16 }
                 ]
               }
             ]
@@ -58,14 +58,14 @@
 
     var chartRoot = {
       id: "chart01",
-      name: "chart01",
+      name: "示例图表",
       dataSetBinds:[
         {
           dataSet: {
             name: "周销量",
             fields: [
               { name: "s_name", type: "string" },
-              { name: "s_value", type: "number" },
+              { name: "s_value", type: "number" }
             ]
           },
           fieldSigns: {
@@ -78,12 +78,18 @@
             name: "周利润",
             fields: [
               { name: "p_name", type: "string" },
-              { name: "p_value", type: "number" },
+              { name: "p_gross", type: "number" },
+              { name: "p_net", type: "number" }
             ]
           },
           fieldSigns: {
             "p_name": ["name"],
-            "p_value": ["value"]
+            "p_gross": ["value"],
+            "p_net": ["value"]
+          },
+          fieldAliases: {
+            "p_gross": "毛利率",
+            "p_net": "净利率"
           }
         }
       ]

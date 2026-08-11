@@ -10,7 +10,8 @@
         },
         {
             "name": "value",
-            "nameLabel": "值"
+            "nameLabel": "值",
+            "multiple": true
         }
     ],
     "dataSetRange": 1,

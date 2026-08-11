@@ -89,19 +89,29 @@ var internalRenderer = {
       let dataSetBind = dataSetBinds[i];
       let result = chart.resultOf(chartResult, dataSetBind);
       let nameField = chart.dataSetFieldOfSign(dataSetBind, 0);
-      let valueField = chart.dataSetFieldOfSign(dataSetBind, 1);
-      let fieldMap = { name: nameField, value: [ nameField , valueField ] };
-      let data = chart.resultMapDatas(result, fieldMap);
-      let serisName = chart.dataSetAlias(dataSetBind);
+      let valueFields = chart.dataSetFieldsOfSign(dataSetBind, 1);
+      for(let j=0; j<valueFields.length; j++)
+      {
+        let valueField = valueFields[j];
+        let fieldMap = { name: nameField, value: [ nameField , valueField ] };
+        let data = chart.resultMapDatas(result, fieldMap);
+        let serisName = chart.dataSetAlias(dataSetBind);
+        
+        if(valueFields.length > 1)
+          serisName = serisName + "-" + chart.dataSetFieldAlias(dataSetBind, valueField);
 
-      options.legend.data.push({ name: serisName });
-      options.series.push({ id: i, name: serisName, type: "line", smooth: true, data: data });
+        options.legend.data.push({ name: serisName });
+        options.series.push({
+          id: options.series.length, name: serisName, type: (i == 0 ? "line" : "bar"),
+           smooth: true, data: data
+        });
 
-      data.forEach(row => {
-        var name = row.name;
-        if(name != null && !options.xAxis.data.includes(name))
-          options.xAxis.data.push(name);
-      });
+        data.forEach(row => {
+          var name = row.name;
+          if(name != null && !options.xAxis.data.includes(name))
+            options.xAxis.data.push(name);
+        });
+      }
     }
 
     chart.inflateOptions(options, false);
