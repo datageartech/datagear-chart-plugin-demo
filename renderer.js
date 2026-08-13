@@ -1,12 +1,10 @@
 (function(plugin)
 {
   const internalRendererVar = plugin.additions.internalRendererVar;
-  const internalRendererSource = "dist" + "/" + "internal-renderer.js";
-  const externalDepend = plugin.additions.externalDepend;
   const renderer = {
     depend: {
-        name: internalRendererVar, source: internalRendererSource,
-        version: plugin.version, depend: externalDepend
+        name: internalRendererVar, source: "dist" + "/" + "internal-renderer.js",
+        version: plugin.version, depend: plugin.additions.externalDepend
     },
     render: function(chart) {
         return this._internalRenderer().render(chart);
