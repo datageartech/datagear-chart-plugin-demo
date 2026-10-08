@@ -109,10 +109,11 @@
           const dashboard = dashboardFactory.createForPluginDev({
             plugins: { plugin: plugin, renderer: renderer }
           });
-          dashboard.init();
-          dashboard.fetcher(dashboardFetcher);
-          dashboard.render();
-          dashboard.createChart("#chart01", chartRoot);
+          dashboard.init().then(()=>{
+            dashboard.fetcher(dashboardFetcher);
+            dashboard.render();
+            dashboard.createChart("#chart01", chartRoot);
+          });
         });
       });
 
@@ -126,8 +127,8 @@
           name: "switchTheme"
         });
         chart.theme(theme);
-	    chart.destroy();
-	    chart.render();
+	      chart.destroy();
+	      chart.render();
       });
     });
   </script>
