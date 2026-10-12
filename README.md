@@ -16,7 +16,7 @@ DataGear是一款开源免费的数据可视化分析平台，支持自由制作
 
 - Vite
 
-## 初始化项目
+## 初始化
 
 ### 1. plugin.json
 
@@ -40,9 +40,7 @@ DataGear是一款开源免费的数据可视化分析平台，支持自由制作
 
 - `chartRoot`中的`dataSetBinds`数据。
 
-## 调试项目
-
-注意：调试功能暂不可用，需要待`DataGear-6.1.0`版本发布后才可用。
+## 调试
 
 ```bash
 npm install
@@ -51,10 +49,20 @@ npm run dev
 
 在浏览器中打开调试地址（比如`http://localhost:5173`）即可查看和调试。
 
-## 打包项目
+## 打包
 
 ```bash
 npm run build
 ```
 
 执行后，会在产物目录（默认为`dist`）内生成图表插件的zip包，按照上述图表插件开发文档中的步骤安装至DataGear系统后即可使用。
+
+## 分享
+
+1. 发布插件：
+
+[http://datagear.tech/plugin/release](http://datagear.tech/plugin/release)
+
+2. 浏览插件：
+
+[http://datagear.tech/plugin/](http://datagear.tech/plugin/)
