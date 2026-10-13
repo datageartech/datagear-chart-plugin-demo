@@ -1,0 +1,28 @@
+{
+    "id": "demoVue3",
+    "nameLabel": "Vue3示例",
+    "apiVersion": "2.0",
+    "dataSignSpec":
+    [
+        {
+            "name": "name",
+            "nameLabel": "名称"
+        },
+        {
+            "name": "value",
+            "nameLabel": "值",
+            "multiple": true
+        }
+    ],
+    "dataSetRange": 1,
+    "version": "1.0.0",
+    "platformVersion": ">=6.0.0",
+    "author": "somebody",
+    "contact": "somebody@example.com",
+    "additions":{
+        "internalRendererVar": "demoVue3Renderer",
+        "externalDepend": [
+            { "name": "Vue", "acceptVersion": "^3.0", "importName": "vue" }
+        ]
+    }
+}
