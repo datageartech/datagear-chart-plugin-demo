@@ -1,0 +1,14 @@
+{
+    "id": "demoVue2Lib",
+    "nameLabel": "Vue2库示例",
+    "apiVersion": "2.0",
+    "dataSetRange": "none",
+    "version": "1.0.0",
+    "platformVersion": ">=6.0.0",
+	"use": "lib",
+    "author": "somebody",
+    "contact": "somebody@example.com",
+    "additions":{
+        "libDepend": { "name": "Vue", "version": "2.7.16", "source": [ "lib/vue@2.7.16/vue.min.js" ] }
+    }
+}

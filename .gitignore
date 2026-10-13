@@ -1,6 +1,12 @@
-node_modules/
-dist/
-.temp/
-package-lock.json
 .project
 .settings
+
+normal-use/node_modules/
+normal-use/dist/
+normal-use/.temp/
+normal-use/package-lock.json
+
+lib-use/node_modules/
+lib-use/dist/
+lib-use/.temp/
+lib-use/package-lock.json

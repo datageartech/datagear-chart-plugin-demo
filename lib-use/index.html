@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataGear依赖库图表插件示例</title>
+  <link type="text/css" href="http://datagear.tech/analysisapi/6.1.0/2.0/css/style.css" rel="stylesheet" dg-lib-name="dashboardStyle" />
+  <script type="text/javascript" src="http://datagear.tech/analysisapi/6.1.0/2.0/chartFactory.js" dg-lib-name="chartFactory" ></script>
+  <script type="text/javascript" src="http://datagear.tech/analysisapi/6.1.0/2.0/dashboardFactory.js" dg-lib-name="dashboardFactory" ></script>
+  <script type="text/javascript" src="http://datagear.tech/analysisapi/6.1.0/2.0/chartTool.js" dg-lib-name="chartTool" ></script>
+  <style>
+    body { margin: 0; padding: 1rem; }
+    h1 { text-align: center; margin: 0; }
+    .operation { text-align: center; margin-top: 1rem; }
+    .operation button { padding: 0.5rem 1rem; }
+    .chart { height:  50vh; border: 2px solid #e6e6e6; border-radius: 0.6rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>DataGear依赖库图表插件示例</h1>
+  <div id="chart01" dg-chart-fetcher="global" class="chart"></div>
+
+  <script>
+    var dashboardFetcher = function(context){
+      var dr = {
+        chartResults: {
+          "chart01": {
+            dataSetResults: []
+          }
+        }
+      };
+      return dr;
+    };
+
+    var chartRoot = {
+      id: "chart01",
+      name: "示例图表",
+      dataSetBinds:[]
+    };
+
+    window.addEventListener("load", () => {
+      fetch("plugin.json").then(res => res.json()).then(plugin => {
+        fetch("renderer.js").then(res => res.text()).then(renderer => {
+          chartRoot.plugin = plugin.id;
+          const dashboard = dashboardFactory.createForPluginDev({
+            plugins: { plugin: plugin, renderer: renderer }
+          });
+          dashboard.init().then(()=>{
+            dashboard.fetcher(dashboardFetcher);
+            dashboard.render();
+            dashboard.createChart("#chart01", chartRoot);
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
