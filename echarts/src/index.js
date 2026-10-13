@@ -1,6 +1,6 @@
 import * as echarts from 'echarts';
 
-var internalRenderer = {
+const internalRenderer = {
   render: function (chart) {
     var dsb = chart.dataSetBindMain();
     var nameField = chart.dataSetFieldOfSign(dsb, 0);
