@@ -12,7 +12,7 @@ DataGear是一款开源免费的数据可视化分析平台，支持自由制作
 
 [http://www.datagear.tech/docs/current/custom-chart-plugin.html](http://www.datagear.tech/docs/current/custom-chart-plugin.html)
 
-## 项目结构
+## 开发插件
 
 ### echarts/
 
@@ -25,3 +25,13 @@ Vue3图表插件项目示例。
 ### lib-use/
 
 依赖库用途的项目示例，打包生成的图表插件不具备绘制图表功能，仅用于为其他图表插件提供外部依赖库。
+
+## 分享插件
+
+1、 发布插件：
+
+[http://datagear.tech/plugin/release](http://datagear.tech/plugin/release)
+
+2、 浏览插件：
+
+[http://datagear.tech/plugin/](http://datagear.tech/plugin/)

@@ -24,7 +24,8 @@ const internalRenderer = {
       },
       methods: {
         handleClick(item, event) {
-          // TODO: 实现点击处理
+			    const hds = chart.findEventHandlerDelegates(hd => hd.type == "click");
+			    hds.forEach(hd => { hd.handler(item, event); });
         }
       }
     });
@@ -65,11 +66,12 @@ const internalRenderer = {
   },
 
   on: function (chart, type, handler) {
-    // TODO: 实现事件绑定
+	  chart.registerEventHandlerDelegate(type, handler);
   },
 
   off: function (chart, type, handler) {
-    // TODO: 实现事件解绑
+	  chart.removeEventHandlerDelegate(hd =>
+	  	(handler === undefined ? (hd.type == type) : (hd.type == type && hd.handler == handler)));
   }
 };
 
