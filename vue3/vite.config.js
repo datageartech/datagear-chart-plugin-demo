@@ -10,7 +10,7 @@ const vueAlias = {
 };
 
 //要添加至图表插件zip包的文件列表
-const pluginZipFiles = ['plugin.json', 'renderer.js'];
+const pluginZipFiles = ['plugin.json', 'renderer.js', 'manual.md'];
 
 //对src/index.js进行构建打包时外部化的依赖库
 const buildExternal = [];

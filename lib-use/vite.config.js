@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import zipPack from 'vite-plugin-zip-pack';
 
 //要添加至图表插件zip包的文件列表
-const pluginZipFiles = ['plugin.json', 'renderer.js', 'lib'];
+const pluginZipFiles = ['plugin.json', 'renderer.js', 'manual.md', 'lib'];
 const distDirName = "dist";
 
 // 临时打包目录：项目内的 .temp 目录
