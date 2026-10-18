@@ -102,7 +102,7 @@ const internalRenderer = {
 
         options.legend.data.push({ name: serisName });
         options.series.push({
-          id: options.series.length, name: serisName, type: (i == 0 ? "line" : "bar"),
+          id: options.series.length, name: serisName, type: (options.series.length == 0 ? "line" : "bar"),
            smooth: true, data: data
         });
 
